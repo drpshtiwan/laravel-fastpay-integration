@@ -12,6 +12,8 @@ return [
    */
 
     'environment' => env('FASTPAY_ENVIRONMENT', 'staging'),
+    'staging_base_url' => env('FASTPAY_STAGING_BASE_URL', 'https://staging-apigw-merchant.fast-pay.iq'),
+    'production_base_url' => env('FASTPAY_PRODUCTION_BASE_URL', 'https://apigw-merchant.fast-pay.iq'),
 
     /*
    |--------------------------------------------------------------------------
@@ -24,4 +26,5 @@ return [
 
     "store_id" => env('FASTPAY_STORE_ID'),
     "store_password" => env('FASTPAY_STORE_PASSWORD'),
+    "refund_secret_key" => env('FASTPAY_REFUND_SECRET_KEY'),
 ];

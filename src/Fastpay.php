@@ -10,10 +10,9 @@ use Illuminate\Support\Facades\Validator;
 
 class Fastpay extends FastpayBaseClass
 {
-    public static function initiate($orderId, $cart) : JsonResponse
+    public static function initiate($orderId, $cart): JsonResponse
     {
         try {
-            // validate incoming parameters
             $validator = Validator::make(
                 [
                     'order_id' => $orderId,
@@ -53,7 +52,7 @@ class Fastpay extends FastpayBaseClass
             $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/initiation', [
                 "store_id" => config("fastpay.store_id"),
                 "store_password" => config("fastpay.store_password"),
-                "order_id" =>  $orderId,
+                "order_id" => $orderId,
                 "bill_amount" => $billAmount,
                 "currency" => "IQD",
                 "cart" => $cart,
@@ -73,11 +72,13 @@ class Fastpay extends FastpayBaseClass
     public static function validate($merchantOrderId): JsonResponse
     {
         try {
-            $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/validate', [
-                "store_id" => config("fastpay.store_id"),
-                "store_password" => config("fastpay.store_password"),
-                "order_id" => $merchantOrderId,
-            ])->json();
+            $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/validate',
+                [
+                    "store_id" => config("fastpay.store_id"),
+                    "store_password" => config("fastpay.store_password"),
+                    "order_id" => $merchantOrderId,
+                ])
+                ->json();
 
             return response()->json($response);
         } catch (\Throwable $th) {
@@ -88,13 +89,16 @@ class Fastpay extends FastpayBaseClass
     public static function refund(string $merchantOrderId, string $msisdn, float $amount): JsonResponse
     {
         try {
-            $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/refund', [
-                "store_id"       => config("fastpay.store_id"),
-                "store_password" => config("fastpay.store_password"),
-                "order_id"       => $merchantOrderId,
-                "msisdn"         => $msisdn,
-                "amount"         => $amount,
-            ])->json();
+            $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/refund',
+                [
+                    "store_id" => config("fastpay.store_id"),
+                    "store_password" => config("fastpay.store_password"),
+                    "refund_secret_key" => config("fastpay.refund_secret_key"),
+                    "order_id" => $merchantOrderId,
+                    "msisdn" => $msisdn,
+                    "amount" => $amount,
+                ])
+                ->json();
 
             return response()->json($response);
         } catch (\Throwable $th) {
@@ -109,11 +113,13 @@ class Fastpay extends FastpayBaseClass
     public static function refundValidate(string $merchantOrderId): JsonResponse
     {
         try {
-            $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/refund/validation', [
-                "store_id"       => config("fastpay.store_id"),
-                "store_password" => config("fastpay.store_password"),
-                "order_id"       => $merchantOrderId,
-            ])->json();
+            $response = Http::post(self::baseUrl() . '/api/v1/public/pgw/payment/refund/validation',
+                [
+                    "store_id" => config("fastpay.store_id"),
+                    "store_password" => config("fastpay.store_password"),
+                    "order_id" => $merchantOrderId,
+                ])
+                ->json();
 
             return response()->json($response);
         } catch (\Throwable $th) {

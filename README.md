@@ -32,6 +32,7 @@ After installing the package, make sure to add the following environment variabl
 FASTPAY_ENVIRONMENT=""
 FASTPAY_STORE_ID=""
 FASTPAY_STORE_PASSWORD=""
+FASTPAY_REFUND_SECRET_KEY=""
 ```
 
 **Note:** Ensure to set the `FASTPAY_ENVIRONMENT` variable in your `.env` file to either "staging" or "production" based on your requirements.

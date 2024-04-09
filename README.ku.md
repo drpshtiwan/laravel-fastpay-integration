@@ -23,6 +23,7 @@ php artisan vendor:publish --tag="fastpay"
 FASTPAY_ENVIRONMENT=""
 FASTPAY_STORE_ID=""
 FASTPAY_STORE_PASSWORD=""
+FASTPAY_REFUND_SECRET_KEY=""
 ```
 
 **تێبینی:** دڵنیابە لە ڕێکخستنی گۆڕاوەی `FASTPAY_ENVIRONMENT` لە پەڕگەی `.env` ـەکەتدا بۆ "staging" یان "production" بە پشتبەستن بە پێداویستییەکانتان.
